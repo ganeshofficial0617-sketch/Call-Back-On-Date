@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b5cff">
+  <meta name="description" content="Simple customer callback reminder">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Callback Reminder</title>
+</head>
+<body>
+  <div id="pinScreen" class="screen">
+    <div class="pin-card">
+      <div class="logo">📞</div>
+      <h1>Callback Reminder</h1>
+      <p id="pinSubtitle">Enter your 4-digit PIN</p>
+      <input id="pinInput" class="pin-input" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••">
+      <button id="pinBtn" class="primary">Unlock</button>
+      <p id="pinHint" class="hint"></p>
+    </div>
+  </div>
+
+  <main id="app" hidden>
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">WORK TOOL</div>
+        <h1>Callback Reminder</h1>
+      </div>
+      <button id="lockBtn" class="icon-btn" aria-label="Lock">🔒</button>
+    </header>
+
+    <section class="summary">
+      <div><strong id="pendingCount">0</strong><span>Pending</span></div>
+      <div><strong id="todayCount">0</strong><span>Today</span></div>
+      <div><strong id="doneCount">0</strong><span>Completed</span></div>
+    </section>
+
+    <section class="card">
+      <h2 id="formTitle">Add Callback</h2>
+      <form id="callbackForm">
+        <input type="hidden" id="editId">
+        <label>Name
+          <input id="name" required maxlength="80" autocomplete="name" placeholder="Customer name">
+        </label>
+        <label>Number
+          <input id="phone" required inputmode="tel" maxlength="20" placeholder="Phone number">
+        </label>
+        <label>Loan Amount
+          <input id="amount" inputmode="decimal" maxlength="20" placeholder="₹ 8,25,000">
+        </label>
+        <label>Reason
+          <input id="reason" maxlength="120" placeholder="Documents / callback request / enquiry">
+        </label>
+        <div class="grid2">
+          <label>Callback Date
+            <input id="date" type="date" required>
+          </label>
+          <label>Callback Time
+            <input id="time" type="time" required>
+          </label>
+        </div>
+        <label>Notes
+          <textarea id="notes" rows="3" maxlength="500" placeholder="Extra details..."></textarea>
+        </label>
+        <div class="form-actions">
+          <button type="submit" class="primary">💾 Save Callback</button>
+          <button type="button" id="cancelEdit" class="secondary" hidden>Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="list-head">
+        <h2>Callbacks</h2>
+        <button id="clearDone" class="text-btn">Clear completed</button>
+      </div>
+      <input id="search" class="search" placeholder="🔎 Search name or number">
+      <div id="callbackList" class="list"></div>
+      <div id="empty" class="empty">No callbacks saved yet.</div>
+    </section>
+
+    <section class="footer-note">
+      <button id="changePin" class="secondary small">Change 4-digit PIN</button>
+      <p>Data is stored on this device/browser. Keep a backup if you clear browser data.</p>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
